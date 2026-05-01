@@ -1,0 +1,1264 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0A1612" />
+  <title>ШинОк — підписка на шиномонтаж у Тернополі</title>
+  <meta name="description" content="ШинОк — мобільний застосунок підписки на сезонний шиномонтаж у Тернополі. Заміна та балансування шин — все включено в підписку." />
+
+  <meta property="og:title" content="ШинОк — підписка на шиномонтаж" />
+  <meta property="og:description" content="Сезонний шиномонтаж за фіксованою щомісячною ціною. Заміна та балансування шин." />
+  <meta property="og:image" content="https://shynok.online/og-image.webp" />
+  <meta property="og:url" content="https://shynok.online" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="uk_UA" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="ШинОк — підписка на шиномонтаж" />
+  <meta name="twitter:description" content="Сезонний шиномонтаж за фіксованою щомісячною ціною." />
+
+  <link rel="icon" type="image/webp" href="favicon.webp" />
+  <link rel="apple-touch-icon" href="favicon.webp" />
+
+  <link rel="alternate" hreflang="uk" href="https://shynok.online/" />
+  <link rel="alternate" hreflang="en" href="https://shynok.online/en/" />
+  <link rel="alternate" hreflang="x-default" href="https://shynok.online/" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0A1612;
+      --surface: #132A1F;
+      --surface-2: #1A3D2A;
+      --primary: #10B981;
+      --primary-light: #34D399;
+      --primary-dark: #059669;
+      --text: #F0FDF4;
+      --text-dim: #86EFAC;
+      --text-muted: #4A7A60;
+      --border: rgba(134, 239, 172, 0.12);
+
+      --font-body: 'DM Sans', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      --font-display: 'Manrope', var(--font-body);
+
+      --radius: 20px;
+      --radius-sm: 12px;
+      --space-section: clamp(4rem, 6vw + 1rem, 7rem);
+
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+
+    .glow {
+      position: absolute;
+      pointer-events: none;
+      z-index: 0;
+      border-radius: 50%;
+      filter: blur(80px);
+      opacity: 0.4;
+    }
+    .glow-1 { top: -150px; right: -150px; width: 500px; height: 500px; background: radial-gradient(circle, var(--primary) 0%, transparent 70%); }
+    .glow-2 { top: 600px; left: -200px; width: 600px; height: 600px; background: radial-gradient(circle, var(--primary-dark) 0%, transparent 70%); opacity: 0.25; }
+
+    .container {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Nav */
+    .nav {
+      padding: 1.5rem 0;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(16px);
+      background: rgba(10, 22, 18, 0.7);
+      z-index: 50;
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+    .brand { display: flex; align-items: center; gap: 0.75rem; text-decoration: none; color: inherit; }
+    .brand-icon {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      object-fit: cover;
+      box-shadow: 0 4px 14px -4px rgba(16, 185, 129, 0.4);
+    }
+    .brand-name { font-family: var(--font-display); font-weight: 800; font-size: 1.125rem; letter-spacing: -0.01em; }
+
+    .nav-links { display: flex; gap: 2rem; align-items: center; font-size: 0.95rem; }
+    .nav-links a { color: var(--text-dim); text-decoration: none; transition: color 0.2s var(--ease); }
+    .nav-links a:hover { color: var(--text); }
+    @media (max-width: 720px) { .nav-links { display: none; } }
+
+    .lang-switch {
+      display: inline-flex;
+      gap: 2px;
+      padding: 3px;
+      background: rgba(134, 239, 172, 0.06);
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .lang-switch a {
+      padding: 0.35rem 0.75rem;
+      border-radius: 999px;
+      color: var(--text-muted);
+      text-decoration: none;
+      transition: color 0.2s var(--ease), background 0.2s var(--ease);
+    }
+    .lang-switch a:hover { color: var(--text-dim); }
+    .lang-switch a.active {
+      background: var(--primary);
+      color: var(--bg);
+    }
+    .lang-switch a.active:hover { color: var(--bg); }
+
+    /* Hero */
+    .hero {
+      padding: clamp(4rem, 8vw, 7rem) 0 var(--space-section);
+      text-align: center;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.4rem 1rem;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 999px;
+      font-size: 0.8rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      font-weight: 500;
+      margin-bottom: 2rem;
+    }
+    .badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: var(--primary);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--primary);
+      animation: pulse 2s ease-in-out infinite;
+    }
+    @keyframes pulse { 50% { opacity: 0.5; } }
+
+    h1 {
+      font-family: var(--font-display);
+      font-size: clamp(2.5rem, 5vw + 1rem, 5.5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.5rem;
+    }
+    h1 .accent { color: var(--primary); }
+
+    .hero-sub {
+      font-size: clamp(1.05rem, 1.2vw + 0.8rem, 1.3rem);
+      color: var(--text-dim);
+      max-width: 640px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.5;
+    }
+
+    .cta-row { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.95rem 1.75rem;
+      border-radius: 999px;
+      font-family: var(--font-body);
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease);
+      border: none;
+      cursor: pointer;
+    }
+    .cta-primary {
+      background: var(--primary);
+      color: var(--bg);
+      box-shadow: 0 8px 32px -8px rgba(16, 185, 129, 0.6);
+    }
+    .cta-primary:hover { transform: translateY(-2px); box-shadow: 0 14px 40px -8px rgba(16, 185, 129, 0.7); }
+    .cta-secondary {
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .cta-secondary:hover { background: var(--surface); border-color: var(--primary); }
+
+    /* Stats strip */
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 2rem;
+      margin-top: 4rem;
+      padding-top: 3rem;
+      border-top: 1px solid var(--border);
+    }
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw, 2.75rem);
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+    .stat-label { color: var(--text-dim); font-size: 0.95rem; margin-top: 0.25rem; }
+
+    /* Section heading */
+    .section { padding: var(--space-section) 0; }
+    .section-head { text-align: center; margin-bottom: 3.5rem; }
+    .section-eyebrow {
+      display: inline-block;
+      color: var(--primary);
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(2rem, 3vw + 0.5rem, 3rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+    .section-sub { color: var(--text-dim); max-width: 600px; margin: 0 auto; font-size: 1.05rem; }
+
+    /* Features grid */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.25rem;
+    }
+    .feature {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+    }
+    .feature:hover { transform: translateY(-4px); border-color: rgba(16, 185, 129, 0.4); }
+    .feature-icon {
+      width: 48px; height: 48px;
+      background: rgba(16, 185, 129, 0.15);
+      border-radius: var(--radius-sm);
+      display: grid;
+      place-items: center;
+      margin-bottom: 1.25rem;
+      color: var(--primary);
+    }
+    .feature-icon svg { width: 24px; height: 24px; }
+    .feature h3 {
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .feature p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.55; }
+
+    /* How it works */
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      counter-reset: step;
+    }
+    .step {
+      position: relative;
+      padding: 1.75rem 1.5rem 1.5rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      counter-increment: step;
+      text-align: center;
+    }
+    .step::before {
+      content: counter(step, decimal-leading-zero);
+      display: block;
+      font-family: var(--font-display);
+      font-size: 2.25rem;
+      font-weight: 800;
+      color: var(--primary);
+      letter-spacing: -0.04em;
+      line-height: 1;
+      margin-bottom: 1rem;
+    }
+    .step h4 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      letter-spacing: -0.01em;
+    }
+    .step p { color: var(--text-dim); font-size: 0.95rem; line-height: 1.55; }
+
+    /* App Preview Carousel */
+    .carousel {
+      position: relative;
+      margin-top: 1rem;
+      padding: 0 clamp(2rem, 4vw, 4.5rem);
+    }
+    .carousel-viewport {
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 1.25rem 0 1.5rem;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+    }
+    .carousel-viewport::-webkit-scrollbar { display: none; }
+    .carousel-track {
+      display: flex;
+      gap: 1.5rem;
+      padding: 0 0.5rem;
+    }
+    .carousel-slide {
+      flex: 0 0 auto;
+      width: clamp(220px, 38vw, 280px);
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+      transition: opacity 0.3s var(--ease);
+    }
+    .carousel-slide:not(.is-active) { opacity: 0.55; }
+    .carousel-btn {
+      position: absolute;
+      top: 35%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      z-index: 10;
+      transition: background 0.2s var(--ease), border-color 0.2s var(--ease), opacity 0.2s var(--ease);
+      box-shadow: 0 8px 24px -8px rgba(0, 0, 0, 0.5);
+    }
+    .carousel-btn:hover { background: var(--primary); color: var(--bg); border-color: var(--primary); }
+    .carousel-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+    .carousel-btn.prev { left: 0; }
+    .carousel-btn.next { right: 0; }
+    @media (max-width: 600px) { .carousel-btn { display: none; } .carousel { padding: 0 1rem; } }
+    .carousel-dots {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .carousel-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--border);
+      border: none;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.2s var(--ease), width 0.2s var(--ease);
+    }
+    .carousel-dot.active { background: var(--primary); width: 24px; border-radius: 4px; }
+
+    /* Admin carousel — single phone, arrows close to slide */
+    .carousel-admin {
+      padding: 0;
+      max-width: 320px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .carousel-admin .carousel-track { gap: 1rem; }
+    .carousel-admin .carousel-slide { width: 100%; }
+    .carousel-admin .carousel-slide:not(.is-active) { opacity: 1; }
+    .carousel-admin .carousel-btn { top: 40%; }
+    .carousel-admin .carousel-btn.prev { left: -3.25rem; }
+    .carousel-admin .carousel-btn.next { right: -3.25rem; }
+    @media (max-width: 600px) {
+      .carousel-admin .carousel-btn.prev { left: -0.5rem; }
+      .carousel-admin .carousel-btn.next { right: -0.5rem; }
+    }
+    .phone-frame {
+      position: relative;
+      max-width: 280px;
+      margin: 0 auto;
+      padding: 4px;
+      background: linear-gradient(160deg, #2a2a2a 0%, #0f0f0f 100%);
+      border-radius: 22px;
+      box-shadow:
+        0 30px 60px -20px rgba(0, 0, 0, 0.6),
+        0 0 0 1px rgba(255, 255, 255, 0.06);
+      transition: transform 0.4s var(--ease);
+    }
+    .phone-frame:hover { transform: translateY(-6px) scale(1.03); }
+    .phone-frame img {
+      display: block;
+      width: 100%;
+      border-radius: 18px;
+      aspect-ratio: 272 / 599;
+      object-fit: cover;
+      object-position: top;
+    }
+    .phone-caption {
+      text-align: center;
+      margin-top: 1.25rem;
+      color: var(--text-dim);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+    .phone-caption-sub {
+      display: block;
+      color: var(--text-muted);
+      font-size: 0.8rem;
+      margin-top: 0.25rem;
+      font-weight: 400;
+    }
+
+    /* Admin block */
+    .admin-block {
+      margin-top: 4rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      background: linear-gradient(135deg, var(--surface) 0%, var(--surface-2) 100%);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      padding: clamp(2rem, 4vw, 3.5rem);
+    }
+    @media (max-width: 720px) {
+      .admin-block { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    .admin-block-title {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .admin-block-text { color: var(--text-dim); margin-bottom: 1.5rem; }
+    .admin-block ul { list-style: none; padding: 0; }
+    .admin-block li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+      font-size: 0.95rem;
+    }
+    .admin-block li svg { color: var(--primary); flex-shrink: 0; margin-top: 0.15rem; }
+    .admin-phone { max-width: 240px; }
+
+    /* Plans */
+    .plans-group { margin-bottom: 3rem; }
+    .plans-group:last-child { margin-bottom: 0; }
+    .plans-group-title {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      color: var(--text);
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+    }
+    .plans-group-title svg { color: var(--primary); }
+    .plans-group-sub {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 1.5rem;
+    }
+    .plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    @media (min-width: 720px) {
+      .plans-group--five .plans {
+        grid-template-columns: repeat(6, 1fr);
+      }
+      .plans-group--five .plans .plan { grid-column: span 2; }
+      .plans-group--five .plans .plan:nth-child(4) { grid-column: 2 / span 2; }
+      .plans-group--five .plans .plan:nth-child(5) { grid-column: 4 / span 2; }
+    }
+    .plan {
+      position: relative;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s var(--ease), border-color 0.3s var(--ease);
+    }
+    .plan:hover { transform: translateY(-4px); border-color: rgba(16, 185, 129, 0.4); }
+    .plan-popular { border-color: var(--primary); }
+    .plan-popular::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 0%, rgba(16, 185, 129, 0.08) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .plan-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      display: block;
+      filter: brightness(0.85) contrast(1.05);
+    }
+    .plans-group--sos .plan-image { object-position: top right; }
+    .plan-tag {
+      position: absolute;
+      top: 0.75rem; right: 0.75rem;
+      background: var(--primary);
+      color: var(--bg);
+      font-size: 0.7rem;
+      font-weight: 700;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      z-index: 2;
+      box-shadow: 0 4px 12px -4px rgba(16, 185, 129, 0.6);
+    }
+    .plan-body {
+      padding: 1.25rem 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      position: relative;
+      z-index: 2;
+    }
+    .plan-name {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+    }
+    .plan-price-row { display: flex; align-items: baseline; gap: 0.4rem; margin-bottom: 0.75rem; }
+    .plan-price {
+      font-family: var(--font-display);
+      font-weight: 800;
+      font-size: 1.85rem;
+      color: var(--primary);
+      letter-spacing: -0.02em;
+    }
+    .plan-period { font-size: 0.85rem; color: var(--text-muted); }
+    .plan-meta {
+      font-size: 0.85rem;
+      color: var(--text-dim);
+      padding: 0.65rem 0;
+      border-top: 1px solid var(--border);
+      margin-top: auto;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .plan-meta svg { color: var(--primary); flex-shrink: 0; }
+    .plan-meta strong { color: var(--text); font-weight: 600; }
+
+    /* CTA section */
+    .final-cta {
+      text-align: center;
+      padding: clamp(3rem, 6vw, 5rem) clamp(1.25rem, 4vw, 3rem);
+      background: linear-gradient(135deg, var(--surface-2) 0%, var(--surface) 100%);
+      border: 1px solid var(--border);
+      border-radius: 32px;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta::before {
+      content: '';
+      position: absolute;
+      inset: -50%;
+      background: radial-gradient(circle at 30% 30%, rgba(16, 185, 129, 0.2) 0%, transparent 50%);
+      pointer-events: none;
+    }
+    .final-cta > * { position: relative; }
+    .final-cta h2 {
+      font-family: var(--font-display);
+      font-size: clamp(1.75rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+      line-height: 1.15;
+    }
+    .final-cta p { color: var(--text-dim); margin-bottom: 2rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+
+    .store-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+    .store-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.85rem 1.5rem;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      color: var(--text);
+      text-decoration: none;
+      transition: border-color 0.2s var(--ease);
+    }
+    .store-btn:hover { border-color: var(--primary); }
+    .store-btn-sub { font-size: 0.7rem; color: var(--text-muted); display: block; }
+    .store-btn-name { font-family: var(--font-display); font-weight: 700; font-size: 1rem; }
+
+    /* Footer */
+    footer {
+      padding: 3rem 0 2rem;
+      border-top: 1px solid var(--border);
+      margin-top: var(--space-section);
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 2.5rem;
+    }
+    @media (max-width: 720px) {
+      .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+    }
+    .footer-brand p { color: var(--text-dim); font-size: 0.95rem; margin-top: 1rem; max-width: 320px; line-height: 1.5; }
+    .footer-col h5 {
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+    .footer-col a {
+      display: block;
+      color: var(--text-dim);
+      text-decoration: none;
+      padding: 0.3rem 0;
+      font-size: 0.95rem;
+      transition: color 0.2s var(--ease);
+    }
+    .footer-col a:hover { color: var(--primary); }
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .badge::before { animation: none; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="glow glow-1" aria-hidden="true"></div>
+  <div class="glow glow-2" aria-hidden="true"></div>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="index.html" class="brand">
+        <img src="og-image.webp" alt="ШинОк логотип" class="brand-icon" width="40" height="40" />
+        <span class="brand-name">ШинОк</span>
+      </a>
+      <div style="display:flex; align-items:center; gap: 1.5rem;">
+        <nav class="nav-links" aria-label="Головна навігація">
+          <a href="#features">Можливості</a>
+          <a href="#preview">Застосунок</a>
+          <a href="#how">Як працює</a>
+          <a href="#plans">Тарифи</a>
+          <a href="#contact">Контакти</a>
+        </nav>
+        <div class="lang-switch" role="group" aria-label="Мова сайту">
+          <a href="index.html" class="active" aria-current="page">UA</a>
+          <a href="en/index.html" hreflang="en">EN</a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero container">
+      <span class="badge">Скоро в App Store та Google Play</span>
+      <h1>
+        Шиномонтаж<br />
+        <span class="accent">за підпискою</span>
+      </h1>
+      <p class="hero-sub">
+        Сезонна заміна, балансування і ремонт шин у Тернополі — за фіксованою
+        щомісячною ціною. Один застосунок, один QR-код, нуль черг.
+      </p>
+      <div class="cta-row">
+        <a href="#plans" class="cta cta-primary">
+          Обрати план
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#how" class="cta cta-secondary">Як це працює</a>
+      </div>
+
+      <div class="stats">
+        <div>
+          <div class="stat-num">8</div>
+          <div class="stat-label">тарифних планів</div>
+        </div>
+        <div>
+          <div class="stat-num">24/7</div>
+          <div class="stat-label">SOS виклик з застосунку</div>
+        </div>
+        <div>
+          <div class="stat-num">QR</div>
+          <div class="stat-label">ідентифікація на станції</div>
+        </div>
+        <div>
+          <div class="stat-num">0₴</div>
+          <div class="stat-label">прихованих платежів</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Можливості</span>
+          <h2 class="section-title">Все що потрібно водієві —<br />в одному застосунку</h2>
+          <p class="section-sub">Замість дзвінків і черг — мобільне керування підпискою з повним контролем візитів та оплат.</p>
+        </div>
+
+        <div class="features">
+          <div class="feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <h3>Запис на зручний час</h3>
+            <p>Оберіть вільне віконце з календаря і отримайте підтвердження одразу. Без телефонних розмов.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg>
+            </div>
+            <h3>QR ідентифікація</h3>
+            <p>Покажіть свій QR-код на станції — працівник одразу бачить ваш план, авто та історію візитів.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            </div>
+            <h3>SOS на дорозі</h3>
+            <p>Викликайте виїзну допомогу одним тапом, якщо це передбачено вашим тарифом.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h2v6h-2"/><path d="M14 17H9"/></svg>
+            </div>
+            <h3>Декілька авто</h3>
+            <p>Одна підписка покриває кілька авто — додайте сімейне і робоче в один акаунт.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M3 10h18M8 14h2M14 14h3"/></svg>
+            </div>
+            <h3>Прозора оплата</h3>
+            <p>Підписка списується автоматично через WayForPay. У застосунку — повна історія транзакцій.</p>
+          </div>
+
+          <div class="feature">
+            <div class="feature-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3>Push-сповіщення</h3>
+            <p>Нагадування про візит, готовність шин, статус оплати — нічого не пропустите.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="preview" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Застосунок</span>
+          <h2 class="section-title">Інтерфейс, що говорить<br />з вами однією мовою</h2>
+          <p class="section-sub">Темна emerald-тема, велика типографіка, плавна навігація. Кожен екран продуманий для швидкого користування — без зайвих тапів.</p>
+        </div>
+
+        <div class="carousel" data-carousel aria-roledescription="carousel">
+          <button class="carousel-btn prev" aria-label="Попередній слайд" data-carousel-prev>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+          </button>
+          <button class="carousel-btn next" aria-label="Наступний слайд" data-carousel-next>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+          </button>
+          <div class="carousel-viewport swipeable" data-carousel-viewport>
+            <div class="carousel-track">
+              <div class="carousel-slide">
+                <div class="phone-frame">
+                  <img src="screans/user-screans/main-user-page.webp" alt="Головний екран ШинОк" loading="lazy" />
+                </div>
+                <div class="phone-caption">Головна<span class="phone-caption-sub">Підписка та найближчі візити</span></div>
+              </div>
+              <div class="carousel-slide">
+                <div class="phone-frame">
+                  <img src="screans/user-screans/booking-page.webp" alt="Запис на обслуговування" loading="lazy" />
+                </div>
+                <div class="phone-caption">Запис<span class="phone-caption-sub">Календар і деталі авто</span></div>
+              </div>
+              <div class="carousel-slide">
+                <div class="phone-frame">
+                  <img src="screans/user-screans/subscriptions-page.webp" alt="Тарифні плани" loading="lazy" />
+                </div>
+                <div class="phone-caption">Підписки<span class="phone-caption-sub">Оберіть оптимальний план</span></div>
+              </div>
+              <div class="carousel-slide">
+                <div class="phone-frame">
+                  <img src="screans/user-screans/history-page.webp" alt="Історія обслуговувань" loading="lazy" />
+                </div>
+                <div class="phone-caption">Історія<span class="phone-caption-sub">Усі візити та послуги</span></div>
+              </div>
+              <div class="carousel-slide">
+                <div class="phone-frame">
+                  <img src="screans/user-screans/profile-page.webp" alt="Профіль користувача" loading="lazy" />
+                </div>
+                <div class="phone-caption">Профіль<span class="phone-caption-sub">Авто, налаштування, мова</span></div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-dots" data-carousel-dots role="tablist" aria-label="Навігація по екранах"></div>
+        </div>
+
+        <div class="admin-block">
+          <div>
+            <span class="section-eyebrow">Для бізнесу</span>
+            <h3 class="admin-block-title">Адмін-панель прямо в застосунку</h3>
+            <p class="admin-block-text">
+              Окремий інтерфейс для власника СТО та працівників — статистика, керування записами, аналітика підписок без потреби в окремій веб-системі.
+            </p>
+            <ul>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                <span>KPI у реальному часі: активні підписки, дохід, кількість обслуговувань</span>
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                <span>Календар записів з фільтрами на день, тиждень або статус</span>
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                <span>Сканування QR клієнта — і одразу видно його план та авто</span>
+              </li>
+              <li>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6L9 17l-5-5"/></svg>
+                <span>Аналітика розподілу підписок та динаміки росту</span>
+              </li>
+            </ul>
+          </div>
+          <div class="carousel carousel-admin" data-carousel aria-roledescription="carousel">
+            <button class="carousel-btn prev" aria-label="Попередній екран адміна" data-carousel-prev>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M15 18l-6-6 6-6"/></svg>
+            </button>
+            <button class="carousel-btn next" aria-label="Наступний екран адміна" data-carousel-next>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M9 18l6-6-6-6"/></svg>
+            </button>
+            <div class="carousel-viewport swipeable" data-carousel-viewport>
+              <div class="carousel-track">
+                <div class="carousel-slide">
+                  <div class="phone-frame admin-phone">
+                    <img src="screans/admin-screans/dashboard-page.webp" alt="Адмін-панель — огляд" loading="lazy" />
+                  </div>
+                  <div class="phone-caption">Огляд<span class="phone-caption-sub">KPI та графіки</span></div>
+                </div>
+                <div class="carousel-slide">
+                  <div class="phone-frame admin-phone">
+                    <img src="screans/admin-screans/clients-page.webp" alt="Адмін-панель — клієнти" loading="lazy" />
+                  </div>
+                  <div class="phone-caption">Клієнти<span class="phone-caption-sub">База користувачів</span></div>
+                </div>
+                <div class="carousel-slide">
+                  <div class="phone-frame admin-phone">
+                    <img src="screans/admin-screans/apointments-page.webp" alt="Адмін-панель — записи" loading="lazy" />
+                  </div>
+                  <div class="phone-caption">Записи<span class="phone-caption-sub">Календар з фільтрами</span></div>
+                </div>
+                <div class="carousel-slide">
+                  <div class="phone-frame admin-phone">
+                    <img src="screans/admin-screans/analitics-page.webp" alt="Адмін-панель — аналітика" loading="lazy" />
+                  </div>
+                  <div class="phone-caption">Аналітика<span class="phone-caption-sub">Динаміка та тренди</span></div>
+                </div>
+              </div>
+            </div>
+            <div class="carousel-dots" data-carousel-dots role="tablist" aria-label="Навігація по екранах адмін-панелі"></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="how" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Як це працює</span>
+          <h2 class="section-title">Чотири кроки —<br />і ви на підписці</h2>
+        </div>
+
+        <div class="steps">
+          <div class="step">
+            <h4>Завантажте застосунок</h4>
+            <p>Безкоштовно з App Store або Google Play. Вхід через Apple ID або Google.</p>
+          </div>
+          <div class="step">
+            <h4>Оберіть план</h4>
+            <p>Від базового сезонного до VIP з виїзним обслуговуванням і пріоритетним SOS.</p>
+          </div>
+          <div class="step">
+            <h4>Запишіться</h4>
+            <p>Оберіть зручне віконце у календарі станції — підтвердження надійде одразу.</p>
+          </div>
+          <div class="step">
+            <h4>Приходьте з QR</h4>
+            <p>Покажіть код у застосунку — працівник одразу бачить ваше авто й деталі плану.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="plans" class="section">
+      <div class="container">
+        <div class="section-head">
+          <span class="section-eyebrow">Тарифи</span>
+          <h2 class="section-title">Оберіть свій ритм</h2>
+          <p class="section-sub">8 тарифних планів — від мінімального обслуговування до VIP-сервісу і екстреної допомоги SOS. Зміна плану в застосунку в один тап.</p>
+        </div>
+
+        <div class="plans-group plans-group--five">
+          <h3 class="plans-group-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="3"/></svg>
+            Підписка з балансом
+          </h3>
+          <p class="plans-group-sub">Щомісяця ви отримуєте баланс грн на стаціонарне обслуговування — заміна, балансування, ремонт.</p>
+
+          <div class="plans">
+            <div class="plan">
+              <img src="plans/econom.webp" alt="Економ план" class="plan-image" loading="lazy" />
+              <div class="plan-body">
+                <div class="plan-name">Економ</div>
+                <div class="plan-price-row">
+                  <span class="plan-price">159₴</span>
+                  <span class="plan-period">/ міс</span>
+                </div>
+                <div class="plan-meta">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 14h2"/></svg>
+                  Баланс: <strong>1 000 грн / міс</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="plan plan-popular">
+              <span class="plan-tag">Рекомендуємо</span>
+              <img src="plans/basic.webp" alt="Базовий план" class="plan-image" loading="lazy" />
+              <div class="plan-body">
+                <div class="plan-name">Базовий</div>
+                <div class="plan-price-row">
+                  <span class="plan-price">209₴</span>
+                  <span class="plan-period">/ міс</span>
+                </div>
+                <div class="plan-meta">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 14h2"/></svg>
+                  Баланс: <strong>2 000 грн / міс</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="plan">
+              <img src="plans/standard.webp" alt="Стандарт план" class="plan-image" loading="lazy" />
+              <div class="plan-body">
+                <div class="plan-name">Стандарт</div>
+                <div class="plan-price-row">
+                  <span class="plan-price">318₴</span>
+                  <span class="plan-period">/ міс</span>
+                </div>
+                <div class="plan-meta">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 14h2"/></svg>
+                  Баланс: <strong>3 000 грн / міс</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="plan plan-popular">
+              <span class="plan-tag">Рекомендуємо</span>
+              <img src="plans/premium.webp" alt="Преміум план" class="plan-image" loading="lazy" />
+              <div class="plan-body">
+                <div class="plan-name">Преміум</div>
+                <div class="plan-price-row">
+                  <span class="plan-price">368₴</span>
+                  <span class="plan-period">/ міс</span>
+                </div>
+                <div class="plan-meta">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 14h2"/></svg>
+                  Баланс: <strong>4 000 грн / міс</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="plan">
+              <img src="plans/vip.webp" alt="VIP план" class="plan-image" loading="lazy" />
+              <div class="plan-body">
+                <div class="plan-name">VIP</div>
+                <div class="plan-price-row">
+                  <span class="plan-price">499₴</span>
+                  <span class="plan-period">/ міс</span>
+                </div>
+                <div class="plan-meta">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="6" width="18" height="13" rx="2"/><path d="M8 14h2"/></svg>
+                  Баланс: <strong>5 000 грн / міс</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="plans-group plans-group--sos">
+          <h3 class="plans-group-title">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+            SOS — екстрена допомога на дорозі
+          </h3>
+          <p class="plans-group-sub">Виїзд майстра для заміни колеса або вирішення проблеми з шиною коли ви далеко від СТО.</p>
+
+          <div class="plans">
+            <div class="plan">
+              <img src="plans/sos.webp" alt="SOS I план" class="plan-image" loading="lazy" />
+              <div class="plan-body">
+                <div class="plan-name">SOS I</div>
+                <div class="plan-price-row">
+                  <span class="plan-price">99₴</span>
+                  <span class="plan-period">/ міс</span>
+                </div>
+                <div class="plan-meta">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h2v6h-2"/></svg>
+                  Покриття: <strong>1 авто</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="plan plan-popular">
+              <span class="plan-tag">Рекомендуємо</span>
+              <img src="plans/sos.webp" alt="SOS II план" class="plan-image" loading="lazy" />
+              <div class="plan-body">
+                <div class="plan-name">SOS II</div>
+                <div class="plan-price-row">
+                  <span class="plan-price">189₴</span>
+                  <span class="plan-period">/ міс</span>
+                </div>
+                <div class="plan-meta">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h2v6h-2"/></svg>
+                  Покриття: <strong>2 авто</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="plan">
+              <img src="plans/sos.webp" alt="SOS III план" class="plan-image" loading="lazy" />
+              <div class="plan-body">
+                <div class="plan-name">SOS III</div>
+                <div class="plan-price-row">
+                  <span class="plan-price">249₴</span>
+                  <span class="plan-period">/ міс</span>
+                </div>
+                <div class="plan-meta">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-6l2-5h9l4 5h2v6h-2"/></svg>
+                  Покриття: <strong>3 авто</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p style="text-align:center; color: var(--text-muted); margin-top: 2rem; font-size: 0.85rem;">
+          Підписка списується автоматично. Скасувати можна в застосунку у будь-який момент.
+        </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="container">
+        <div class="final-cta">
+          <h2>Готові спробувати?</h2>
+          <p>Завантажте ШинОк, авторизуйтесь через Google або Apple і оформіть першу підписку за хвилину.</p>
+          <div class="store-buttons">
+            <a href="#" class="store-btn" aria-label="App Store — скоро">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M17.05 20.28c-.98.95-2.05.86-3.08.43-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.43C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/></svg>
+              <span>
+                <span class="store-btn-sub">Скоро</span>
+                <span class="store-btn-name">App Store</span>
+              </span>
+            </a>
+            <a href="#" class="store-btn" aria-label="Google Play — скоро">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 1.27c-.4.4-.6.92-.6 1.59v18.28c0 .67.2 1.19.6 1.59l.07.06 10.24-10.24v-.24L3.67 1.21l-.07.06z"/><path d="M17.42 14.95l-3.41-3.41v-.24l3.41-3.41.07.05 4.04 2.3c1.16.65 1.16 1.71 0 2.36l-4.04 2.3-.07.05z" opacity=".7"/><path d="M17.49 14.9l-3.48-3.48L3.6 21.83c.38.4.99.45 1.69.05l12.2-6.98z" opacity=".85"/><path d="M17.49 7.94L5.29 1c-.7-.4-1.31-.35-1.69.05l10.41 10.41 3.48-3.52z"/></svg>
+              <span>
+                <span class="store-btn-sub">Скоро</span>
+                <span class="store-btn-name">Google Play</span>
+              </span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="contact">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="brand">
+            <img src="og-image.webp" alt="ШинОк логотип" class="brand-icon" width="40" height="40" />
+            <span class="brand-name">ШинОк</span>
+          </div>
+          <p>Підписка на сезонний шиномонтаж у Тернополі. Заміна, балансування і ремонт — все у застосунку.</p>
+        </div>
+        <div class="footer-col">
+          <h5>Продукт</h5>
+          <a href="#features">Можливості</a>
+          <a href="#how">Як працює</a>
+          <a href="#plans">Тарифи</a>
+        </div>
+        <div class="footer-col">
+          <h5>Юридичне</h5>
+          <a href="privacy.html">Політика конфіденційності</a>
+          <a href="terms.html">Умови використання</a>
+          <a href="mailto:kharkov.timur@gmail.com">kharkov.timur@gmail.com</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 ФОП Харьков Т.Ю. — Всі права захищені.</span>
+        <span>Зроблено в Україні</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      const carousels = document.querySelectorAll('[data-carousel]');
+      carousels.forEach(initCarousel);
+
+      function initCarousel(root) {
+        const viewport = root.querySelector('[data-carousel-viewport]');
+        const track = viewport.querySelector('.carousel-track');
+        const slides = Array.from(track.children);
+        const prevBtn = root.querySelector('[data-carousel-prev]');
+        const nextBtn = root.querySelector('[data-carousel-next]');
+        const dotsContainer = root.querySelector('[data-carousel-dots]');
+
+        slides.forEach((_, i) => {
+          const dot = document.createElement('button');
+          dot.className = 'carousel-dot';
+          dot.setAttribute('aria-label', 'Слайд ' + (i + 1));
+          dot.setAttribute('role', 'tab');
+          dotsContainer.appendChild(dot);
+        });
+        const dots = Array.from(dotsContainer.children);
+
+        let currentIdx = 0;
+        let isProgrammaticScroll = false;
+        let programmaticTimer;
+
+        function smoothScrollTo(target) {
+          isProgrammaticScroll = true;
+          clearTimeout(programmaticTimer);
+          programmaticTimer = setTimeout(() => { isProgrammaticScroll = false; }, 600);
+          try { viewport.scrollTo({ left: target, behavior: 'smooth' }); }
+          catch (e) { viewport.scrollLeft = target; }
+        }
+
+        function goTo(index) {
+          currentIdx = Math.max(0, Math.min(slides.length - 1, index));
+          const slide = slides[currentIdx];
+          if (slide) {
+            const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+            const target = Math.max(0, Math.min(slide.offsetLeft, maxScroll));
+            smoothScrollTo(target);
+          }
+          render();
+        }
+
+        function syncFromScroll() {
+          if (isProgrammaticScroll) return;
+          const left = viewport.scrollLeft;
+          const maxScroll = Math.max(0, viewport.scrollWidth - viewport.clientWidth);
+          if (maxScroll > 0 && left >= maxScroll - 2) {
+            currentIdx = slides.length - 1;
+          } else if (left <= 2) {
+            currentIdx = 0;
+          } else {
+            let bestIdx = 0;
+            let bestDist = Infinity;
+            slides.forEach((slide, i) => {
+              const dist = Math.abs(slide.offsetLeft - left);
+              if (dist < bestDist) { bestDist = dist; bestIdx = i; }
+            });
+            currentIdx = bestIdx;
+          }
+          render();
+        }
+
+        function render() {
+          dots.forEach((d, i) => d.classList.toggle('active', i === currentIdx));
+          slides.forEach((s, i) => s.classList.toggle('is-active', i === currentIdx));
+          if (prevBtn) prevBtn.disabled = currentIdx === 0;
+          if (nextBtn) nextBtn.disabled = currentIdx === slides.length - 1;
+        }
+
+        if (prevBtn) prevBtn.addEventListener('click', () => goTo(currentIdx - 1));
+        if (nextBtn) nextBtn.addEventListener('click', () => goTo(currentIdx + 1));
+        dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+        let scrollTimer;
+        viewport.addEventListener('scroll', () => {
+          clearTimeout(scrollTimer);
+          scrollTimer = setTimeout(syncFromScroll, 80);
+        }, { passive: true });
+
+        window.addEventListener('resize', render);
+        requestAnimationFrame(() => requestAnimationFrame(render));
+        window.addEventListener('load', render);
+        setTimeout(render, 200);
+      }
+    })();
+  </script>
+</body>
+</html>
