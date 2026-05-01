@@ -88,7 +88,7 @@
     .container {
       max-width: 1180px;
       margin: 0 auto;
-      padding: 0 clamp(1.25rem, 4vw, 2.5rem);
+      padding: 0 clamp(1rem, 4vw, 2.5rem);
       position: relative;
       z-index: 1;
     }
@@ -144,7 +144,8 @@
     .lang-switch a.active:hover { color: var(--bg); }
 
     .hero {
-      padding: clamp(4rem, 8vw, 7rem) 0 var(--space-section);
+      padding-top: clamp(4rem, 8vw, 7rem);
+      padding-bottom: var(--space-section);
       text-align: center;
     }
     .badge {
