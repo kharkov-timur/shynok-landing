@@ -643,14 +643,20 @@
     }
     .footer-grid {
       display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr;
+      grid-template-columns: 1.4fr 1fr 1fr 1.4fr;
       gap: 3rem;
       margin-bottom: 2.5rem;
     }
-    @media (max-width: 720px) {
+    @media (max-width: 960px) {
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    }
+    @media (max-width: 600px) {
       .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
     }
     .footer-brand p { color: var(--text-dim); font-size: 0.95rem; margin-top: 1rem; max-width: 320px; line-height: 1.5; }
+    .footer-col address { font-style: normal; color: var(--text-dim); font-size: 0.95rem; line-height: 1.5; }
+    .footer-col .contact-row { display: flex; align-items: flex-start; gap: 0.6rem; padding: 0.3rem 0; }
+    .footer-col .contact-row svg { flex-shrink: 0; color: var(--primary); margin-top: 0.15rem; }
     .footer-col h5 {
       font-family: var(--font-display);
       font-weight: 700;
@@ -714,7 +720,7 @@
 
   <main>
     <section class="hero container">
-      <span class="badge">Coming soon to App Store and Google Play</span>
+      <span class="badge">Available on Google Play · App Store coming soon</span>
       <h1>
         Tire service<br />
         <span class="accent">by subscription</span>
@@ -1128,10 +1134,16 @@
                 <span class="store-btn-name">App Store</span>
               </span>
             </a>
-            <a href="#" class="store-btn" aria-label="Google Play — coming soon">
+            <a
+              href="https://play.google.com/store/apps/details?id=online.shynok.app"
+              target="_blank"
+              rel="noopener"
+              class="store-btn"
+              aria-label="Get ShynOk on Google Play"
+            >
               <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><path d="M3.6 1.27c-.4.4-.6.92-.6 1.59v18.28c0 .67.2 1.19.6 1.59l.07.06 10.24-10.24v-.24L3.67 1.21l-.07.06z"/><path d="M17.42 14.95l-3.41-3.41v-.24l3.41-3.41.07.05 4.04 2.3c1.16.65 1.16 1.71 0 2.36l-4.04 2.3-.07.05z" opacity=".7"/><path d="M17.49 14.9l-3.48-3.48L3.6 21.83c.38.4.99.45 1.69.05l12.2-6.98z" opacity=".85"/><path d="M17.49 7.94L5.29 1c-.7-.4-1.31-.35-1.69.05l10.41 10.41 3.48-3.52z"/></svg>
               <span>
-                <span class="store-btn-sub">Coming soon</span>
+                <span class="store-btn-sub">Get it on</span>
                 <span class="store-btn-name">Google Play</span>
               </span>
             </a>
@@ -1159,9 +1171,39 @@
         </div>
         <div class="footer-col">
           <h5>Legal</h5>
-          <a href="privacy.html">Privacy Policy</a>
-          <a href="terms.html">Terms of Service</a>
+          <a href="/en/privacy.html">Privacy Policy</a>
+          <a href="/en/terms.html">Terms of Service</a>
           <a href="mailto:kharkov.timur@gmail.com">kharkov.timur@gmail.com</a>
+        </div>
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <div class="contact-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z" />
+            </svg>
+            <a href="tel:+380967476387">+38 (096) 747-63-87</a>
+          </div>
+          <div class="contact-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <polyline points="22,6 12,13 2,6" />
+            </svg>
+            <a href="mailto:andrushenkojeka3434@gmail.com">andrushenkojeka3434@gmail.com</a>
+          </div>
+          <div class="contact-row">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+              <circle cx="12" cy="10" r="3" />
+            </svg>
+            <address>
+              <a
+                href="https://www.google.com/maps/search/?api=1&query=Stepana+Budnoho+St.+1%D0%99%2C+Ternopil%2C+Ukraine"
+                target="_blank"
+                rel="noopener"
+                >1Й Stepana Budnoho St.,<br />Ternopil, Ukraine</a
+              >
+            </address>
+          </div>
         </div>
       </div>
       <div class="footer-bottom">
