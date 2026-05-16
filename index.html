@@ -387,6 +387,36 @@
         font-size: 1.05rem;
       }
 
+      /* Map embed */
+      .map-section {
+        padding-bottom: 0;
+      }
+      .map-section .section-head {
+        margin-bottom: 2.5rem;
+      }
+      .map-wrap {
+        position: relative;
+        border-radius: var(--radius);
+        overflow: hidden;
+        border: 1px solid var(--border);
+        box-shadow: 0 24px 64px -24px rgba(0, 0, 0, 0.5);
+        background: var(--surface);
+        aspect-ratio: 16 / 9;
+        max-height: 520px;
+      }
+      .map-wrap iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: 0;
+      }
+      @media (max-width: 720px) {
+        .map-wrap {
+          aspect-ratio: 4 / 5;
+          max-height: none;
+        }
+      }
+
       /* Features grid */
       .features {
         display: grid;
@@ -1967,6 +1997,33 @@
                 </span>
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section
+        class="section map-section"
+        id="location"
+        aria-labelledby="map-heading"
+      >
+        <div class="container">
+          <div class="section-head">
+            <span class="section-eyebrow">Локація</span>
+            <h2 class="section-title" id="map-heading">Як нас знайти</h2>
+            <p class="section-sub">
+              Шиномонтаж за адресою
+              <strong>вул. Степана Будного 1Й, Тернопіль</strong>. Прокладіть
+              маршрут у Google Maps або зателефонуйте перед візитом.
+            </p>
+          </div>
+          <div class="map-wrap">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d196.2471239176557!2d25.57120597142343!3d49.54064216479415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4730371c481c089f%3A0xa4122c098f2b6dbb!2z0KjQuNC90L7QvNC-0L3RgtCw0LYgwqvQqNCY0J3QndCY0Jkg0JzQkNCZ0KHQotCV0KDCuyDQoNGW0LLQvdGP0L3QvdGPINGC0LAg0LDRgNCz0L7QvdC90LUg0LfQstCw0YDRjtCy0LDQvdC90Y8g0LTQuNGB0LrRltCyLiDQnNC-0LbQu9C40LLQuNC5INCy0LjRl9C30LQg0LTQviDQutC70ZbRlNC90YLQsCAu!5e0!3m2!1suk!2sua!4v1778917025359!5m2!1suk!2sua"
+              title="ШинОк на мапі Google"
+              loading="lazy"
+              allowfullscreen
+              referrerpolicy="no-referrer-when-downgrade"
+            ></iframe>
           </div>
         </div>
       </section>
