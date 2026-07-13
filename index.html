@@ -1061,6 +1061,238 @@
           transition: none !important;
         }
       }
+      /* Plan details — clickable cards + modal */
+      .plan--clickable {
+        cursor: pointer;
+      }
+      .plan--clickable:focus-visible {
+        outline: 2px solid var(--primary);
+        outline-offset: 3px;
+      }
+      .plan-details-hint {
+        margin-top: 0.85rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: var(--primary-light);
+      }
+      .plan-details-hint svg {
+        transition: transform 0.25s var(--ease);
+      }
+      .plan--clickable:hover .plan-details-hint svg {
+        transform: translateX(3px);
+      }
+
+      .plan-modal {
+        position: fixed;
+        inset: 0;
+        z-index: 100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1.25rem;
+      }
+      .plan-modal[hidden] {
+        display: none;
+      }
+      .plan-modal__overlay {
+        position: absolute;
+        inset: 0;
+        background: rgba(3, 12, 8, 0.72);
+        backdrop-filter: blur(6px);
+        -webkit-backdrop-filter: blur(6px);
+        opacity: 0;
+        transition: opacity 0.28s var(--ease);
+      }
+      .plan-modal.is-open .plan-modal__overlay {
+        opacity: 1;
+      }
+      .plan-modal__dialog {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        width: min(640px, 100%);
+        max-height: min(86vh, 780px);
+        overflow: hidden;
+        background: linear-gradient(
+          180deg,
+          var(--surface-2) 0%,
+          var(--surface) 45%
+        );
+        border: 1px solid var(--border);
+        border-radius: 24px;
+        padding: clamp(1.5rem, 4vw, 2.25rem);
+        box-shadow: 0 40px 80px -30px rgba(0, 0, 0, 0.7);
+        transform: translateY(16px) scale(0.98);
+        opacity: 0;
+        transition:
+          transform 0.32s var(--ease),
+          opacity 0.32s var(--ease);
+      }
+      /* Header + CTA stay fixed; only the body scrolls. */
+      .plan-modal__badge,
+      .plan-modal__title,
+      .plan-modal__pricerow,
+      .plan-modal__meta,
+      .plan-modal__cta {
+        flex: 0 0 auto;
+      }
+      .plan-modal.is-open .plan-modal__dialog {
+        transform: none;
+        opacity: 1;
+      }
+      .plan-modal__close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 40px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--border);
+        border-radius: 50%;
+        background: rgba(10, 22, 18, 0.6);
+        color: var(--text-dim);
+        cursor: pointer;
+        transition:
+          background 0.2s var(--ease),
+          color 0.2s var(--ease),
+          transform 0.2s var(--ease);
+      }
+      .plan-modal__close:hover {
+        background: var(--surface);
+        color: var(--text);
+        transform: rotate(90deg);
+      }
+      .plan-modal__badge {
+        display: inline-block;
+        background: var(--primary);
+        color: var(--bg);
+        font-size: 0.68rem;
+        font-weight: 700;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        padding: 0.25rem 0.7rem;
+        border-radius: 999px;
+        margin-bottom: 0.85rem;
+      }
+      .plan-modal__title {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: clamp(1.4rem, 3vw, 1.85rem);
+        letter-spacing: -0.02em;
+        color: var(--text);
+        padding-right: 2.5rem;
+      }
+      .plan-modal__pricerow {
+        display: flex;
+        align-items: baseline;
+        gap: 0.4rem;
+        margin-top: 0.6rem;
+      }
+      .plan-modal__price {
+        font-family: var(--font-display);
+        font-weight: 800;
+        font-size: 2rem;
+        color: var(--primary);
+        letter-spacing: -0.02em;
+      }
+      .plan-modal__period {
+        font-size: 0.9rem;
+        color: var(--text-muted);
+      }
+      .plan-modal__meta {
+        margin-top: 0.5rem;
+        font-size: 0.9rem;
+        color: var(--text-dim);
+      }
+      .plan-modal__meta strong {
+        color: var(--text);
+        font-weight: 600;
+      }
+      .plan-modal__body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: thin;
+        scrollbar-color: rgba(16, 185, 129, 0.4) transparent;
+        margin-top: 1.4rem;
+        border-top: 1px solid var(--border);
+        padding-top: 1.4rem;
+      }
+      .plan-modal__body::-webkit-scrollbar {
+        width: 5px;
+      }
+      .plan-modal__body::-webkit-scrollbar-track {
+        background: transparent;
+      }
+      .plan-modal__body::-webkit-scrollbar-thumb {
+        background: rgba(16, 185, 129, 0.35);
+        border-radius: 999px;
+      }
+      .plan-modal__body::-webkit-scrollbar-thumb:hover {
+        background: rgba(16, 185, 129, 0.6);
+      }
+      .plan-modal__h {
+        font-family: var(--font-display);
+        font-weight: 700;
+        font-size: 1.05rem;
+        color: var(--text);
+        margin: 1.4rem 0 0.5rem;
+      }
+      .plan-modal__h:first-child {
+        margin-top: 0;
+      }
+      .plan-modal__p {
+        font-size: 0.95rem;
+        line-height: 1.7;
+        color: var(--text-dim);
+        white-space: pre-line;
+        margin-bottom: 0.85rem;
+      }
+      .plan-modal__p:last-child {
+        margin-bottom: 0;
+      }
+      .plan-modal__cta {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        margin-top: 1.6rem;
+        width: 100%;
+        padding: 0.9rem 1.5rem;
+        background: var(--primary);
+        color: var(--bg);
+        font-weight: 700;
+        border-radius: 999px;
+        text-decoration: none;
+        transition:
+          background 0.2s var(--ease),
+          transform 0.2s var(--ease);
+      }
+      .plan-modal__cta:hover {
+        background: var(--primary-light);
+        transform: translateY(-2px);
+      }
+      body.plan-modal-open {
+        overflow: hidden;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .plan-modal__overlay,
+        .plan-modal__dialog,
+        .plan-modal__close,
+        .plan-modal__cta,
+        .plan-details-hint svg {
+          transition: none;
+        }
+        .plan-modal__dialog {
+          transform: none;
+        }
+      }
     </style>
   </head>
   <body>
@@ -2209,6 +2441,496 @@
           window.addEventListener('load', render);
           setTimeout(render, 200);
         }
+      })();
+    </script>
+    <div
+      class="plan-modal"
+      id="planModal"
+      hidden
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="planModalTitle"
+    >
+      <div class="plan-modal__overlay" data-plan-close></div>
+      <div class="plan-modal__dialog" role="document">
+        <button class="plan-modal__close" type="button" data-plan-close>
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path d="M18 6 6 18M6 6l12 12" />
+          </svg>
+        </button>
+        <h3 class="plan-modal__title" id="planModalTitle" data-plan-title></h3>
+        <div class="plan-modal__pricerow">
+          <span class="plan-modal__price" data-plan-price></span>
+          <span class="plan-modal__period" data-plan-period></span>
+        </div>
+        <div class="plan-modal__meta" data-plan-metatext></div>
+        <div class="plan-modal__body" data-plan-body></div>
+        <a
+          class="plan-modal__cta"
+          data-plan-cta
+          href="https://play.google.com/store/apps/details?id=online.shynok.app"
+          target="_blank"
+          rel="noopener"
+        ></a>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var API_BASE = 'https://tire-serviceapi-production.up.railway.app';
+        var isEn =
+          (document.documentElement.lang || 'uk')
+            .toLowerCase()
+            .indexOf('en') === 0;
+        var lang = isEn ? 'en' : 'uk';
+        var T = isEn
+          ? {
+              balanceLabel: 'Balance: ',
+              balanceUnit: 'UAH / mo',
+              coverageLabel: 'Coverage: ',
+              period: '/ mo',
+              close: 'Close',
+              cta: 'Get it in the app',
+              hint: 'Details',
+              recommended: 'Recommended',
+            }
+          : {
+              balanceLabel: 'Баланс: ',
+              balanceUnit: 'грн / міс',
+              coverageLabel: 'Покриття: ',
+              period: '/ міс',
+              close: 'Закрити',
+              cta: 'Оформити в застосунку',
+              hint: 'Детальніше',
+              recommended: 'Рекомендуємо',
+            };
+        var nf = new Intl.NumberFormat(isEn ? 'en-US' : 'uk-UA');
+        var GROUPS = [
+          {
+            sel: '.plans-group--five .plan',
+            slugs: ['econom', 'basic', 'standard', 'premium', 'vip'],
+          },
+          {
+            sel: '.plans-group--sos .plan',
+            slugs: ['sos-1', 'sos-2', 'sos-3'],
+          },
+        ];
+
+        var modal = document.getElementById('planModal');
+        if (!modal) return;
+        var elTitle = modal.querySelector('[data-plan-title]');
+        var elPrice = modal.querySelector('[data-plan-price]');
+        var elPeriod = modal.querySelector('[data-plan-period]');
+        var elMeta = modal.querySelector('[data-plan-metatext]');
+        var elBody = modal.querySelector('[data-plan-body]');
+        var elCta = modal.querySelector('[data-plan-cta]');
+        var closeBtn = modal.querySelector('.plan-modal__close');
+        var closers = modal.querySelectorAll('[data-plan-close]');
+        var lastFocused = null;
+        var closeTimer = null;
+
+        elPeriod.textContent = T.period;
+        elCta.textContent = T.cta;
+        if (closeBtn) closeBtn.setAttribute('aria-label', T.close);
+
+        function money(v) {
+          return nf.format(v) + '₴';
+        }
+
+        function vehicleUnit(n) {
+          if (isEn) return n === 1 ? 'vehicle' : 'vehicles';
+          return 'авто';
+        }
+
+        function setMeta(target, plan) {
+          target.textContent = '';
+          var label = document.createElement('span');
+          var strong = document.createElement('strong');
+          if (plan.type === 'SOS' && plan.maxVehicles != null) {
+            label.textContent = T.coverageLabel;
+            strong.textContent =
+              nf.format(plan.maxVehicles) + ' ' + vehicleUnit(plan.maxVehicles);
+          } else if (plan.serviceBalance != null) {
+            label.textContent = T.balanceLabel;
+            strong.textContent =
+              nf.format(plan.serviceBalance) + ' ' + T.balanceUnit;
+          } else {
+            return;
+          }
+          target.appendChild(label);
+          target.appendChild(strong);
+        }
+
+        function localized(field) {
+          return field && field[lang] ? String(field[lang]).trim() : '';
+        }
+
+        // Shared benefits/conditions copy, mirroring the app's LegacyContent
+        // (apps/mobile i18n planInfo.*). Shown in the modal only when a plan has
+        // no curated detailsContent — seeded plans already carry these blocks.
+        var DESCRIPTIONS = {
+          "uk": {
+            "econom": "Обравши цей пакет, Ви отримуєте повний спектр послуг нашого стаціонарного шиномонтажу з місячним лімітом до 1000 грн. У вартість входять усі необхідні роботи та розхідні матеріали: шиномонтаж, балансування, рівняння дисків, аргонне зварювання та інші послуги без прихованих доплат.\n\nЩомісячно система автоматично списуватиме лише 159 грн, а баланс поновлюватиметься автоматично. Наш додаток дозволяє контролювати залишок коштів, записуватись завчасно та уникати черг.\n\nНайчастіше цей пакет обирають для одного автомобіля, розуміючи, що при активному використанні авто інколи може знадобитися незначна доплата понад ліміт. Особливо вигідний тариф для водіїв, які:\n• не надто активно користуються авто у міжсезоння;\n• мають окремі комплекти зимових та літніх коліс на дисках;\n• хочуть рівномірно розподілити витрати на обслуговування авто.\n\nПлатіть невеликими сумами, заощаджуйте на обслуговуванні та будьте впевнені, що у потрібний момент ми завжди підтримаємо Вас. Ласкаво просимо до нашої родини!",
+            "basic": "Обравши цей рекомендований пакет, Ви отримуєте повний спектр послуг нашого стаціонарного шиномонтажу з місячним лімітом до 2000 грн. Лише на 50 грн дорожче за попередній пакет — але з подвоєним лімітом та значно більшими можливостями для обслуговування Вашого автомобіля.\n\nУ тариф вже входять усі необхідні розхідні матеріали, рівняння дисків, аргонне зварювання та інші послуги без жодних винятків. Система автоматично списуватиме 209 грн щомісяця, а баланс Вашого пакета буде поновлюватися автоматично. Наш додаток дозволяє контролювати залишок коштів та дає можливість обслуговуватись без черги.\n\nЯк правило, цей пакет обирають для одного автомобіля, і у 90% випадків клієнтам не доводиться нічого доплачувати. Ліміту в 2000 грн повністю вистачає як на міжсезонні ремонтні роботи, так і на сезонне перевзування. Особливо рекомендуємо цей пакет власникам автомобілів, які активно користуються транспортом, а також тим, хто має окремі комплекти зимової та літньої гуми без дисків.\n\nЗаощаджуйте, сплачуйте невеликими щомісячними платежами, підтримуйте нас, а коли виникне потреба — ми з радістю підтримаємо Вас. Ласкаво просимо до нашої родини!",
+            "standard": "Обравши цей пакет, Ви отримуєте повний спектр послуг нашого стаціонарного шиномонтажу з місячним лімітом у розмірі 3000 грн. У вартість входять усі необхідні розхідні матеріали, ремонт шин, рівняння дисків, аргонне зварювання та інші роботи — без винятків і прихованих платежів.\n\nСистема автоматично щомісяця списуватиме лише 318 грн, а ліміт коштів поновлюватиметься автоматично. Наш додаток дозволяє контролювати поточний баланс, історію використання послуг та дає можливість обслуговуватись без черг.\n\nЦей пакет найчастіше обирають для двох автомобілів, коли один використовується активно, а інший — менш інтенсивно. Ліміту 3000 грн зазвичай достатньо для всіх міжсезонних робіт, сезонного перевзування та більшості ремонтів. У деяких випадках можуть виникати незначні доплати, наприклад при складному рівнянні дисків або додаткових роботах. Пакет також чудово підходить для власників комплектів зимової та літньої гуми на дисках для обох автомобілів.\n\nЗаощаджуйте, сплачуючи невеликими щомісячними внесками, та будьте впевнені, що у потрібний момент ми подбаємо про Ваш автомобіль. Будемо раді бачити Вас у нашій родині клієнтів!",
+            "premium": "Обравши цей рекомендований пакет, Ви отримуєте повний спектр послуг нашого стаціонарного шиномонтажу з щомісячним лімітом у розмірі 4000 грн. Лише на 50 грн дорожче за попередній тариф, але з подвоєним лімітом — це один із найвигідніших варіантів для активних водіїв та сімей з кількома автомобілями. У пакет входять абсолютно всі необхідні послуги без винятків:\n• усі розхідні матеріали;\n• ремонт та обслуговування шин;\n• рівняння дисків;\n• аргонне зварювання;\n• сезонне перевзування та інші роботи.\n\nСистема автоматично списуватиме лише 368 грн щомісяця, а баланс пакету поновлюватиметься без Вашої участі. Наш додаток дозволяє контролювати залишок коштів, записуватись онлайн та обслуговуватись без черг.\n\nЦей пакет найчастіше обирають власники двох або навіть трьох автомобілів. Ліміту у 4000 грн зазвичай достатньо для всіх міжсезонних ремонтів і сезонного перевзування двох авто. Якщо ж у Вас три автомобілі, іноді може знадобитись незначна доплата. Ми рекомендуємо цей тариф тим, у кого один або два автомобілі активно використовуються щодня, а третій є допоміжним, або тим, хто має окремі комплекти зимової та літньої гуми на дисках.\n\nЗаощаджуйте вже сьогодні — сплачуйте невеликими щомісячними платежами, а ми завжди будемо готові підтримати Вас у потрібний момент. Ласкаво просимо до нашої родини!",
+            "vip": "Це наш преміальний пакет для тих, хто цінує максимальний комфорт, швидкість та впевненість у будь-якій ситуації. Обравши цей тариф, Ви отримуєте повний спектр послуг як на стаціонарному, так і на мобільному шиномонтажі з лімітом до 5000 грн щомісяця. Пакет дозволяє обслуговувати автомобіль там, де зручно саме Вам — вдома, на роботі чи безпосередньо на дорозі. Перевзування, ремонт, аварійний виїзд та допомога в будь-якій ситуації — усе включено. Всі необхідні розхідні матеріали, рівняння дисків, профілактичні чистки та інші послуги надаються без додаткових оплат у межах ліміту.\n\nЩомісячна оплата складає лише 499 грн. Кошти списуються автоматично, а ліміт поновлюється кожного місяця без Вашої участі. Наш мобільний додаток дозволяє контролювати поточний баланс, історію обслуговування та має вбудовану кнопку SOS. У разі потреби достатньо одного натискання — система миттєво повідомить нас про необхідність допомоги та автоматично передасть Вашу геолокацію.\n\nЦей пакет найчастіше обирають власники декількох автомобілів або ті, хто хоче отримувати якісний шиномонтажний сервіс без черг і зайвих поїздок. Ліміту у 5000 грн вистачає на більшість аварійних викликів та сезонне перевзування.\n\nЗаощаджуйте, сплачуючи невеликі суми щомісяця, та будьте впевнені, що у потрібний момент ми завжди поруч, щоб допомогти. Ласкаво просимо до нашої родини!",
+            "sos": "Підписка «Ситуація SOS» — це Ваша впевненість на дорозі у випадку аварійних ситуацій з колесами. Якщо трапиться прокол, пошкодження шини чи інша проблема — ми оперативно приїдемо до Вас на допомогу у межах робочого графіка нашого мобільного шиномонтажу: щодня з 8:00 до 22:00, без вихідних.\n\nВиїзд та аварійні ремонтні роботи в межах міста і до 10 км за його межами — безкоштовні. Головна мета цього пакету — швидко допомогти Вам вийти з неприємної ситуації найпростішим та найзручнішим способом. Ми ніколи не залишимо наших клієнтів без допомоги.\n\nПісля оформлення підписки система автоматично списуватиме щомісячний платіж — 99 грн (189 грн або 249 грн залежно від обраного пакету) — та відкриє доступ до кнопки SOS у додатку. Натиснувши кнопку, Ви миттєво повідомляєте нас про проблему, а система автоматично передає Вашу геолокацію для швидкого виїзду нашої команди.\n\nПоки підписка активна — Ви маєте право на безкоштовну аварійну допомогу. Навіть одна аварійна ситуація з колесом на рік вже робить підписку вигідною, адже мінімальний виїзд мобільного шиномонтажу коштує від 1300 до 1500 грн.\n\nСплачуйте невелику суму щомісяця, підтримуйте наш сервіс, а у потрібний момент ми безкоштовно підтримаємо Вас на дорозі. Ласкаво просимо до нашої родини!"
+          },
+          "en": {
+            "econom": "By choosing this package, you get the full range of services at our stationary tire shop with a monthly limit of up to UAH 1000. The price includes all necessary work and consumables: tire fitting, balancing, disc straightening, argon welding and other services with no hidden charges.\n\nEach month the system automatically withdraws only UAH 159, and your balance is replenished automatically. Our app lets you track your remaining balance, book in advance and avoid queues.\n\nThis package is most often chosen for a single car, with the understanding that heavy use may occasionally require a small surcharge above the limit. It is especially advantageous for drivers who:\n• do not use their car too actively during the off-season;\n• keep separate sets of winter and summer wheels on discs;\n• want to spread out their car maintenance costs evenly.\n\nPay in small amounts, save on maintenance, and rest assured that we will always support you when you need it. Welcome to our family!",
+            "basic": "By choosing this recommended package, you get the full range of services at our stationary tire shop with a monthly limit of up to UAH 2000. Only UAH 50 more than the previous package — but with double the limit and far greater possibilities for maintaining your car.\n\nThe plan already includes all necessary consumables, disc straightening, argon welding and other services without any exceptions. The system automatically withdraws UAH 209 per month, and your package balance is replenished automatically. Our app lets you track your remaining balance and get serviced without waiting in line.\n\nAs a rule, this package is chosen for a single car, and in 90% of cases clients do not have to pay anything extra. A UAH 2000 limit is fully sufficient for both off-season repairs and seasonal tire changes. We especially recommend this package to owners who use their cars actively, as well as to those who keep separate sets of winter and summer tires without discs.\n\nSave money, pay in small monthly instalments, support us, and when the need arises — we will gladly support you. Welcome to our family!",
+            "standard": "By choosing this package, you get the full range of services at our stationary tire shop with a monthly limit of UAH 3000. The price includes all necessary consumables, tire repair, disc straightening, argon welding and other work — with no exceptions or hidden fees.\n\nEach month the system automatically withdraws only UAH 318, and the funds limit is replenished automatically. Our app lets you track your current balance, your service history, and get serviced without queues.\n\nThis package is most often chosen for two cars, when one is used actively and the other less intensively. A UAH 3000 limit is usually enough for all off-season work, seasonal tire changes and most repairs. In some cases minor surcharges may arise, for example for complex disc straightening or additional work. The package is also great for owners of winter and summer tire sets on discs for both cars.\n\nSave money with small monthly instalments, and rest assured that we will take care of your car when the moment comes. We would be glad to welcome you to our family of clients!",
+            "premium": "By choosing this recommended package, you get the full range of services at our stationary tire shop with a monthly limit of UAH 4000. Only UAH 50 more than the previous plan, but with double the limit — this is one of the most advantageous options for active drivers and families with several cars. The package includes absolutely all necessary services without exception:\n• all consumables;\n• tire repair and maintenance;\n• disc straightening;\n• argon welding;\n• seasonal tire changes and other work.\n\nThe system automatically withdraws only UAH 368 per month, and the package balance is replenished without any effort on your part. Our app lets you track your remaining balance, book online and get serviced without queues.\n\nThis package is most often chosen by owners of two or even three cars. A UAH 4000 limit is usually enough for all off-season repairs and seasonal tire changes for two cars. If you have three cars, a small surcharge may occasionally be needed. We recommend this plan to those who use one or two cars actively every day with a third as a backup, or to those who keep separate sets of winter and summer tires on discs.\n\nStart saving today — pay in small monthly instalments, and we will always be ready to support you when the moment comes. Welcome to our family!",
+            "vip": "This is our premium package for those who value maximum comfort, speed and confidence in any situation. By choosing this plan, you get the full range of services at both our stationary and mobile tire shops with a limit of up to UAH 5000 per month. The package lets you service your car wherever is convenient for you — at home, at work or right on the road. Tire changes, repairs, emergency call-outs and help in any situation — all included. All necessary consumables, disc straightening, preventive cleaning and other services are provided at no extra charge within the limit.\n\nThe monthly payment is only UAH 499. Funds are withdrawn automatically, and the limit is replenished every month without any effort on your part. Our mobile app lets you track your current balance and service history and has a built-in SOS button. When needed, a single tap is enough — the system instantly notifies us that help is required and automatically shares your location.\n\nThis package is most often chosen by owners of several cars or those who want quality tire service without queues and unnecessary trips. A UAH 5000 limit is enough for most emergency call-outs and seasonal tire changes.\n\nSave money by paying small amounts each month, and rest assured that we are always nearby to help when the moment comes. Welcome to our family!",
+            "sos": "The «SOS Situation» subscription is your confidence on the road in case of wheel emergencies. If you get a puncture, tire damage or another problem — we will promptly come to help you within the working hours of our mobile tire service: daily from 8:00 to 22:00, no days off.\n\nCall-outs and emergency repair work within the city and up to 10 km beyond it are free. The main goal of this package is to quickly help you get out of an unpleasant situation in the simplest and most convenient way. We will never leave our clients without help.\n\nAfter you subscribe, the system automatically withdraws a monthly payment — UAH 99 (UAH 189 or UAH 249 depending on the chosen package) — and unlocks access to the SOS button in the app. By tapping the button, you instantly notify us of the problem, and the system automatically shares your location so our team can respond quickly.\n\nWhile the subscription is active, you are entitled to free emergency assistance. Even a single wheel emergency per year already makes the subscription worthwhile, since a minimum mobile tire service call-out costs from UAH 1300 to 1500.\n\nPay a small amount each month, support our service, and when the moment comes we will support you on the road for free. Welcome to our family!"
+          }
+        };
+
+        var LEGACY = {
+          uk: {
+            descriptionTitle: 'Опис',
+            benefitsTitle: 'Переваги підписки',
+            conditionsTitle: 'Умови підписки',
+            sosConditionsTitle: 'Умови підписки «Ситуація SOS»',
+            benefits: {
+              intro:
+                'Всі послуги нашого шиномонтажу Ви отримуєте в повному обсязі в межах щомісячного ліміту відповідно до обраного тарифного плану.',
+              listIntro: 'Ви отримуєте:',
+              items: [
+                'дві сезонні заміни коліс на рік;',
+                'ремонтні роботи, які можуть виникати протягом міжсезоння;',
+                'аргонне зварювання та вирівнювання дисків;',
+                'професійне балансування коліс;',
+                'змазування ступиць мідною змазкою;',
+                'очищення посадкових місць шин від виробітки та корозії;',
+                'шліфування дисків для покращення балансування;',
+                'всі необхідні профілактичні та супутні роботи для якісного обслуговування коліс.',
+              ],
+              outro:
+                'Економте свій час без черг. Для клієнтів по підписці у нас працює окремий цех обслуговування. Просто зателефонуйте нам для запису або забронюйте місце самостійно в нашому додатку — і ми будемо чекати Вас на обслуговування.',
+            },
+            conditions: {
+              intro:
+                'Після оформлення підписки наші зобов’язання набувають чинності з наступного дня після оплати та діють протягом усього періоду активної підписки.',
+              items: [
+                'Кожен клієнт має право обслуговувати автомобілі, які були зазначені під час оформлення підписки. У разі зміни автомобіля просимо повідомити нас для актуалізації даних.',
+                'У сезон перевзування всі клієнти обслуговуються виключно за попереднім записом. У випадку аварійних ремонтних робіт обслуговування здійснюється поза чергою.',
+                'Обслуговування в межах щомісячного ліміту виконується максимально якісно та включає всі необхідні профілактичні роботи: очищення посадкових місць шин, змазку ступиці мідною змазкою, технічне очищення елементів колеса та інші супутні роботи.',
+                'Кожен тарифний план має встановлений щомісячний ліміт на обслуговування. Рекомендуємо ознайомитися з усіма видами підписок та обрати тариф, який максимально покриватиме витрати на обслуговування одного або декількох автомобілів, включаючи сезонне перевзування. У разі перевищення встановленого ліміту різниця оплачується додатково.',
+                'Усі умови та переваги підписки діють лише за умови безперервної щомісячної оплати. Оплата списується автоматично.',
+              ],
+            },
+            cancellation: {
+              intro:
+                'Скасувати підписку можна у будь-який момент. У разі припинення підписки раніше ніж через 12 місяців без поважної причини клієнт втрачає право на повторне підключення. До поважних причин належать:',
+              reasons: [
+                'продаж або заміна автомобіля;',
+                'зміна тарифного плану;',
+                'виїзд за кордон;',
+                'інші обставини, погоджені індивідуально.',
+              ],
+              outro:
+                'У таких випадках просимо зв’язатися з нами для розгляду ситуації та прийняття індивідуального рішення.',
+            },
+            sos: {
+              intro:
+                'Підписка «Ситуація SOS» передбачає наш виїзд до клієнта у випадку аварійної ситуації з колесами в межах робочого графіка шиномонтажу з 8:00 до 22:00 без вихідних.',
+              items: [
+                'Виїзд по місту та 10 км від міста, виконання ремонтних робіт — безкоштовні і виконуються у найпростіший спосіб, щоб поставити автомобіль на ноги.',
+                'Підписка одночасно діє максимум на 3 автомобілі, і чим більше авто тим дешевше.',
+                'Послуга поширюється виключно на аварійні випадки, пов’язані з колесами та шинами.',
+              ],
+            },
+          },
+          en: {
+            descriptionTitle: 'Description',
+            benefitsTitle: 'Subscription benefits',
+            conditionsTitle: 'Subscription terms',
+            sosConditionsTitle: '«SOS Situation» subscription terms',
+            benefits: {
+              intro:
+                'You receive all of our tire shop services in full within the monthly limit of your chosen plan.',
+              listIntro: 'You receive:',
+              items: [
+                'two seasonal wheel changes per year;',
+                'repair work that may arise during the off-season;',
+                'argon welding and disc straightening;',
+                'professional wheel balancing;',
+                'lubrication of hubs with copper grease;',
+                'cleaning of tire seating surfaces from wear and corrosion;',
+                'disc grinding to improve balancing;',
+                'all necessary preventive and related work for quality wheel maintenance.',
+              ],
+              outro:
+                'Save your time without queues. For subscription clients we operate a separate service bay. Simply call us to book or reserve a slot yourself in our app — and we will be waiting to serve you.',
+            },
+            conditions: {
+              intro:
+                'After you subscribe, our obligations take effect from the day after payment and remain in force throughout the entire period of the active subscription.',
+              items: [
+                'Each client is entitled to service the cars specified when subscribing. If you change your car, please notify us so we can update your details.',
+                'During the tire-change season, all clients are served strictly by prior appointment. In the case of emergency repair work, service is provided out of turn.',
+                'Service within the monthly limit is carried out to the highest standard and includes all necessary preventive work: cleaning of tire seating surfaces, lubrication of the hub with copper grease, technical cleaning of wheel components and other related work.',
+                'Each plan has a set monthly service limit. We recommend reviewing all subscription types and choosing a plan that best covers the maintenance costs of one or several cars, including seasonal tire changes. If the set limit is exceeded, the difference is paid separately.',
+                'All subscription terms and benefits apply only with continuous monthly payment. Payment is withdrawn automatically.',
+              ],
+            },
+            cancellation: {
+              intro:
+                'You can cancel your subscription at any time. If the subscription is terminated earlier than 12 months without a valid reason, the client loses the right to re-subscribe. Valid reasons include:',
+              reasons: [
+                'sale or replacement of the car;',
+                'change of plan;',
+                'travel abroad;',
+                'other circumstances agreed on an individual basis.',
+              ],
+              outro:
+                'In such cases, please contact us so we can review the situation and reach an individual decision.',
+            },
+            sos: {
+              intro:
+                "The «SOS Situation» subscription covers our call-out to the client in the event of a wheel emergency within the tire shop's working hours from 8:00 to 22:00, no days off.",
+              items: [
+                'Call-outs within the city and 10 km from the city, and repair work, are free and carried out in the simplest way to get the car back on its feet.',
+                'The subscription applies to a maximum of 3 cars at once, and the more cars, the cheaper it is.',
+                'The service covers exclusively emergencies related to wheels and tires.',
+              ],
+            },
+          },
+        };
+
+        function bulletLines(items) {
+          return (items || [])
+            .map(function (i) {
+              return '• ' + i;
+            })
+            .join('\n');
+        }
+
+        function joinLines() {
+          return Array.prototype.slice
+            .call(arguments)
+            .filter(function (s) {
+              return s && s.trim();
+            })
+            .join('\n');
+        }
+
+        function appendHeading(txt) {
+          if (!txt) return;
+          var h = document.createElement('h4');
+          h.className = 'plan-modal__h';
+          h.textContent = txt;
+          elBody.appendChild(h);
+        }
+
+        function appendParagraph(txt) {
+          if (!txt) return;
+          var p = document.createElement('p');
+          p.className = 'plan-modal__p';
+          p.textContent = txt;
+          elBody.appendChild(p);
+        }
+
+        function appendBlocks(blocks) {
+          if (!Array.isArray(blocks)) return 0;
+          var count = 0;
+          blocks.forEach(function (b) {
+            var txt = b && b.text ? localized(b.text) : '';
+            if (!txt) return;
+            if (b.type === 'HEADING') appendHeading(txt);
+            else appendParagraph(txt);
+            count += 1;
+          });
+          return count;
+        }
+
+        // Fallback that mirrors the app's LegacyContent: description + shared
+        // Benefits + Conditions for balance plans, or description + SOS terms.
+        function appendLegacy(plan) {
+          var lg = LEGACY[lang];
+          var descKey = plan.type === 'SOS' ? 'sos' : plan.slug;
+          var desc =
+            (DESCRIPTIONS[lang] && DESCRIPTIONS[lang][descKey]) ||
+            localized(plan.cardDescription);
+          if (desc) {
+            appendHeading(lg.descriptionTitle);
+            appendParagraph(desc);
+          }
+          if (plan.type === 'SOS') {
+            appendHeading(lg.sosConditionsTitle);
+            appendParagraph(joinLines(lg.sos.intro, bulletLines(lg.sos.items)));
+            return;
+          }
+          appendHeading(lg.benefitsTitle);
+          appendParagraph(lg.benefits.intro);
+          appendParagraph(
+            joinLines(lg.benefits.listIntro, bulletLines(lg.benefits.items)),
+          );
+          appendParagraph(lg.benefits.outro);
+          appendHeading(lg.conditionsTitle);
+          appendParagraph(
+            joinLines(lg.conditions.intro, bulletLines(lg.conditions.items)),
+          );
+          appendParagraph(
+            joinLines(
+              lg.cancellation.intro,
+              bulletLines(lg.cancellation.reasons),
+              lg.cancellation.outro,
+            ),
+          );
+        }
+
+        function openModal(plan) {
+          elTitle.textContent =
+            localized(plan.displayName) || plan._fallbackName || '';
+          elPrice.textContent =
+            typeof plan.monthlyPrice === 'number' ? money(plan.monthlyPrice) : '';
+          setMeta(elMeta, plan);
+
+          elBody.textContent = '';
+          // Curated blocks when present (seeded plans already include the
+          // benefits/terms sections); otherwise fall back to the shared copy.
+          if (appendBlocks(plan.detailsContent) === 0) appendLegacy(plan);
+          elBody.hidden = elBody.childNodes.length === 0;
+
+          if (closeTimer) {
+            clearTimeout(closeTimer);
+            closeTimer = null;
+          }
+          lastFocused = document.activeElement;
+          modal.hidden = false;
+          document.body.classList.add('plan-modal-open');
+          // Force a reflow so the opacity/transform transition plays, instead of
+          // relying on requestAnimationFrame (which is throttled in background
+          // tabs and can leave the dialog stuck at opacity 0).
+          void modal.offsetWidth;
+          modal.classList.add('is-open');
+          if (closeBtn) closeBtn.focus();
+          document.addEventListener('keydown', onKeydown);
+        }
+
+        function closeModal() {
+          modal.classList.remove('is-open');
+          document.body.classList.remove('plan-modal-open');
+          document.removeEventListener('keydown', onKeydown);
+          closeTimer = setTimeout(function () {
+            // Only hide if not reopened during the close animation window.
+            if (!modal.classList.contains('is-open')) modal.hidden = true;
+            closeTimer = null;
+          }, 320);
+          if (lastFocused && lastFocused.focus) lastFocused.focus();
+        }
+
+        function onKeydown(e) {
+          if (e.key === 'Escape') {
+            closeModal();
+          } else if (e.key === 'Tab') {
+            var f = modal.querySelectorAll('button, a[href]');
+            if (!f.length) return;
+            var first = f[0];
+            var last = f[f.length - 1];
+            if (e.shiftKey && document.activeElement === first) {
+              e.preventDefault();
+              last.focus();
+            } else if (!e.shiftKey && document.activeElement === last) {
+              e.preventDefault();
+              first.focus();
+            }
+          }
+        }
+
+        Array.prototype.forEach.call(closers, function (c) {
+          c.addEventListener('click', closeModal);
+        });
+
+        function addHint(card) {
+          if (card.querySelector('.plan-details-hint')) return;
+          var body = card.querySelector('.plan-body');
+          if (!body) return;
+          var hint = document.createElement('span');
+          hint.className = 'plan-details-hint';
+          var label = document.createElement('span');
+          label.textContent = T.hint;
+          hint.appendChild(label);
+          hint.insertAdjacentHTML(
+            'beforeend',
+            '<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
+          );
+          body.appendChild(hint);
+        }
+
+        function hydrate(card, plan) {
+          var nameEl = card.querySelector('.plan-name');
+          plan._fallbackName = nameEl ? nameEl.textContent : '';
+          var liveName = localized(plan.displayName);
+          if (nameEl && liveName) nameEl.textContent = liveName;
+
+          var priceEl = card.querySelector('.plan-price');
+          if (priceEl && typeof plan.monthlyPrice === 'number') {
+            priceEl.textContent = money(plan.monthlyPrice);
+          }
+
+          var strong = card.querySelector('.plan-meta strong');
+          if (strong) {
+            if (plan.type === 'SOS' && plan.maxVehicles != null) {
+              strong.textContent =
+                nf.format(plan.maxVehicles) +
+                ' ' +
+                vehicleUnit(plan.maxVehicles);
+            } else if (plan.serviceBalance != null) {
+              strong.textContent =
+                nf.format(plan.serviceBalance) + ' ' + T.balanceUnit;
+            }
+          }
+
+          addHint(card);
+          card.classList.add('plan--clickable');
+          card.setAttribute('role', 'button');
+          card.setAttribute('tabindex', '0');
+          card.setAttribute('aria-haspopup', 'dialog');
+          card.addEventListener('click', function () {
+            openModal(plan);
+          });
+          card.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              openModal(plan);
+            }
+          });
+        }
+
+        fetch(API_BASE + '/public/plans', {
+          headers: { Accept: 'application/json' },
+        })
+          .then(function (r) {
+            return r.ok ? r.json() : Promise.reject(r.status);
+          })
+          .then(function (data) {
+            var bySlug = {};
+            var plans = data && data.plans ? data.plans : [];
+            plans.forEach(function (p) {
+              if (p && p.slug) bySlug[p.slug] = p;
+            });
+            GROUPS.forEach(function (g) {
+              var cards = document.querySelectorAll(g.sel);
+              Array.prototype.forEach.call(cards, function (card, i) {
+                var plan = bySlug[g.slugs[i]];
+                if (plan) hydrate(card, plan);
+              });
+            });
+          })
+          .catch(function () {
+            /* Endpoint unreachable — keep the static cards, no modal. */
+          });
       })();
     </script>
   </body>
