@@ -99,7 +99,7 @@
     <div class="container">
       <a href="/en/" class="back">← Back to home</a>
       <h1>Privacy Policy</h1>
-      <div class="meta">Effective date: May 1, 2026 · Last revision: May 1, 2026</div>
+      <div class="meta">Effective date: May 1, 2026 · Last revision: July 20, 2026</div>
 
       <p>
         This Privacy Policy describes how Individual Entrepreneur Kharkov Tymur Valeriyovych
@@ -112,28 +112,99 @@
       <ul>
         <li>Name and email — obtained automatically when signing in via Google or Apple.</li>
         <li>Phone number — entered the first time a contact-required action is performed.</li>
-        <li>Vehicle data — make, model, year, license plate, tire size (entered when activating a plan).</li>
-        <li>Payment data — handled exclusively by the WayForPay payment provider; we do not store card numbers.</li>
+        <li>Vehicle data — make, color, and license plate (entered when adding a car).</li>
+        <li>SOS call data — geolocation, issue photos, wheel count and radius. See section 3.</li>
+        <li>Payment data — card details are entered on WayForPay's secure page. See section 4.</li>
       </ul>
 
       <h3>1.2. Data collected automatically</h3>
       <ul>
-        <li>Device technical info — model, OS, app version.</li>
         <li>Push token (used for visit and payment notifications).</li>
-        <li>Error logs — for diagnostic purposes.</li>
+        <li>
+          Our server's technical logs — records of requests and errors, used for troubleshooting
+          and abuse prevention.
+        </li>
       </ul>
+      <p>
+        We do <strong>not</strong> collect your device model, operating system version, or app
+        version. The app contains no analytics, advertising, or crash-reporting software (Google
+        Analytics, Firebase, Sentry, Crashlytics, advertising SDKs, and the like), and we do not
+        build advertising profiles of users.
+      </p>
 
       <h2>2. How we use your data</h2>
       <ul>
         <li>Delivering tire service according to the chosen subscription plan.</li>
         <li>Booking and confirming appointments.</li>
         <li>Processing payments and issuing receipts.</li>
-        <li>Push notifications about order status and tire readiness.</li>
+        <li>Push notifications about appointments, subscription status, and SOS call status.</li>
+        <li>
+          Forwarding your geolocation and issue photos to a service employee so they can arrive at
+          your SOS call.
+        </li>
+        <li>QR code identification during a tire service visit.</li>
         <li>User support and responding to inquiries.</li>
         <li>Security: fraud detection and protection from unauthorized access.</li>
       </ul>
 
-      <h2>3. Data sharing with third parties</h2>
+      <h2>3. Geolocation, camera, and SOS call data</h2>
+      <h3>3.1. Geolocation</h3>
+      <p>
+        The app requests precise geolocation (GPS) <strong>only</strong> at the moment you submit an
+        emergency (SOS) call — so that the mobile tire service employee can find you on the road.
+        Coordinates are read once, when you tap the call button. The app does
+        <strong>not</strong> track your location in the background and does not collect a movement
+        history.
+      </p>
+
+      <h3>3.2. Camera and photos</h3>
+      <ul>
+        <li>
+          When submitting an SOS call you attach between 1 and 5 photos of the issue — from the
+          camera or gallery. Photos are compressed directly on your device before upload.
+        </li>
+        <li>
+          The camera is also used by service employees to scan a customer's QR code. Camera frames
+          captured during scanning are <strong>not stored</strong> — only the decoded code is
+          processed.
+        </li>
+        <li>
+          Issue photos are accessible only to authorized service personnel — administrators and
+          tire service employees. Other customers have no access to them.
+        </li>
+      </ul>
+
+      <h3>3.3. SOS call data retention</h3>
+      <p>
+        Coordinates and photos are stored temporarily — from call creation until completion. As soon
+        as the call status changes to "Completed" or "Cancelled", the coordinates are automatically
+        deleted from the database and the photo files are removed from our server, with no delay.
+      </p>
+      <p>
+        The call record itself (car make, status, work performed) remains in your service history —
+        it no longer contains either geolocation or photos.
+      </p>
+
+      <h2>4. Payment data</h2>
+      <p>
+        We do <strong>not receive and do not store</strong> your full card number, expiry date, or
+        CVV. You enter card details directly on the secure WayForPay payment page — the app contains
+        no card entry fields.
+      </p>
+      <p>From WayForPay we receive and store:</p>
+      <ul>
+        <li>
+          the <strong>masked card number</strong> exactly as WayForPay provides it — leading and
+          trailing digits, the rest hidden (for example, 41****1234);
+        </li>
+        <li>the card type, amount, currency, transaction status, and transaction identifier;</li>
+        <li>
+          a reference to the payment token used for monthly subscription renewals — this token
+          cannot be used to reconstruct your card number.
+        </li>
+      </ul>
+
+      <h2>5. Data sharing with third parties</h2>
       <p>
         We do not sell your personal data. Sharing is limited to cases necessary for delivering
         the Service:
@@ -142,51 +213,93 @@
         <li><strong>WayForPay</strong> — payment processing and recurring subscription charges.</li>
         <li><strong>Google / Apple</strong> — OAuth authentication.</li>
         <li><strong>Expo / Google FCM / Apple APNs</strong> — push notification delivery.</li>
-        <li><strong>Hosting providers</strong> (Railway, Vercel) — data storage and processing on servers.</li>
+        <li><strong>Railway</strong> — hosting of the server, database, and uploaded photos.</li>
         <li>By Ukrainian law — upon official request from authorized authorities.</li>
       </ul>
+      <p>
+        We do not share data with advertising networks, data brokers, or analytics services — no
+        such integrations exist in the app.
+      </p>
 
-      <h2>4. Storage and security</h2>
+      <h2>6. Storage and security</h2>
       <p>
         Data is stored on servers in secure data centers and transmitted exclusively over HTTPS/TLS.
         Passwords are not stored — authentication is handled by Google and Apple. Access to data is
         restricted to staff who need it to perform their duties.
       </p>
       <p>
-        We retain your data for as long as your account exists. After account deletion, data is
-        purged within 30 days, except where the law requires longer retention (for example,
-        financial records — up to 3 years).
+        We retain your data for as long as your account exists. When an account is deleted, personal
+        data is anonymized immediately — see section 8. Financial records are retained in anonymized
+        form for the period required by Ukrainian law.
+      </p>
+      <p>
+        A separate retention rule applies to SOS call data: geolocation and photos are deleted as
+        soon as the call is completed or cancelled, regardless of whether your account still exists
+        (section 3.3).
       </p>
 
-      <h2>5. Your rights</h2>
+      <h2>7. Your rights</h2>
       <p>Under Ukrainian Law "On Personal Data Protection" you have the right to:</p>
       <ul>
         <li>Access your data and obtain a processing copy.</li>
         <li>Correct inaccurate data.</li>
-        <li>Delete your account and the associated data.</li>
+        <li>Delete your account (section 8).</li>
         <li>Restrict processing or object to it.</li>
         <li>Withdraw consent (this will make further use of the Service impossible).</li>
       </ul>
+
+      <h2>8. Account deletion</h2>
       <p>
-        You can delete your account directly inside the app: <em>Profile → Settings → Delete
-        Account</em>. Or send a request to
+        You can delete your account yourself inside the app, without contacting support:
+        <em>Profile → Delete account</em>. The action must be confirmed in a dialog. Deletion takes
+        effect immediately, with no waiting period, and cannot be undone.
+      </p>
+      <p><strong>What happens on deletion:</strong></p>
+      <ul>
+        <li>
+          all active, paused, and pending subscriptions are cancelled and recurring card charges
+          stop — we instruct WayForPay to remove the payment token;
+        </li>
+        <li>
+          your personal data is anonymized: your name is replaced with "Deleted account", and your
+          email, phone number, Google and Apple sign-in identifiers, profile picture URL, and push
+          token are erased;
+        </li>
+        <li>
+          your vehicles, notifications, registered push devices, and all sign-in sessions are
+          deleted outright.
+        </li>
+      </ul>
+      <p>
+        <strong>What is retained.</strong> This is anonymization, not complete erasure. Records of
+        payments, subscriptions, and services rendered are retained in anonymized form — they no
+        longer contain your contact details, but we need them for accounting and tax purposes under
+        Ukrainian law.
+      </p>
+      <p>
+        A deleted account can no longer be signed into: its Google and Apple identifiers have been
+        detached from it. If you later sign in again with Google or Apple, a new empty account is
+        created with no access to your previous history.
+      </p>
+      <p>
+        If you cannot use the app, send a request to
         <a href="mailto:kharkov.timur@gmail.com">kharkov.timur@gmail.com</a>.
       </p>
 
-      <h2>6. Children</h2>
+      <h2>9. Children</h2>
       <p>
         The Service is not intended for users under 18. We do not knowingly collect data from
         minors. If you discover that your child has provided data without your consent — contact us
         for deletion.
       </p>
 
-      <h2>7. Policy updates</h2>
+      <h2>10. Policy updates</h2>
       <p>
         We may update this Policy. Significant changes will be communicated via push notification
         or email. The latest revision date is always shown at the top of the page.
       </p>
 
-      <h2>8. Contact</h2>
+      <h2>11. Contact</h2>
       <p>
         Questions about personal data processing should be sent to:
       </p>
